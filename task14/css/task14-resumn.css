@@ -1,0 +1,189 @@
+@charset "utf-8";
+/*
+reset
+*/
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    min-width: 1330px;
+    position: relative;
+    color: #333;
+}
+a{
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+}
+h2 {
+    font-weight: 100;
+}
+* {
+    line-height: 1.1;
+}
+/*
+basic style
+*/
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 50px rgba(0,0,0,.2);
+    border-radius: 5px;
+    padding: 0 30px 0 20px;
+}
+header {
+    padding: 104px 0;
+    position: relative;
+}
+.apply-info {
+    padding-left: 285px;
+    background: url("../images/thumpnail.png") no-repeat 16px center;
+    min-height: 214px;
+    position: relative;
+}
+.apply-info h2 {
+    padding-top: 50px;
+    font-size: 52px;
+    margin-bottom: 20px;
+}
+.apply-info  strong {
+    font-size: 26px;
+}
+.clearfix::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.apply-contacts {
+    position: absolute;
+    top: 104px;
+    right: -30px;
+    width: 462px;
+}
+.apply-contacts dt {
+    border-bottom: 8px solid #282e2e;
+    padding-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.apply-contacts dd {
+    line-height: 42px;
+    font-size: 24px;
+}
+.apply-contacts dd b{
+    margin-right: 18px;
+}
+main dl{
+    margin-bottom: 10px;
+}
+main dt,
+footer dt{
+    border-bottom: 1px solid #ccc;
+    font-size: 30px;
+    padding-bottom: 20px;
+    width: 572px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+main dl p {
+    padding: 20px 0 40px 100px;
+    margin-left: 19px;
+    font-size: 24px;
+    border-left: 1px solid #333;
+    line-height: 35px;
+    margin-top: -5px;
+}
+main dl dd:last-child  p {
+    padding-bottom: 0;
+}
+main dl dd:last-child {
+    margin-bottom: 50px;
+}
+main dl h5::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #333;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+}
+main dl h5 {
+    padding-left: 119px;
+    position: relative;
+    font-size: 26px;
+    text-transform: capitalize;
+}
+main dl h5 time {
+    color: #ccc;
+    margin-left: 10px;
+}
+main dl dd {
+    margin-top: -5px;
+}
+footer dt {
+    margin-bottom: 40px;
+    width: 100%;
+}
+footer dl:first-child {
+    float:left;
+}
+footer dl {
+    float: right;
+    width: 43%;
+}
+footer dl h5 {
+    font-size: 30px;
+    padding-left: 27%;
+    height: 32px;
+    background: url("../images/work_07.png") no-repeat left center;
+    line-height: 32px;
+    text-transform: capitalize;
+}
+footer dl p {
+    padding-left: 27%;
+    font-size: 20px;
+    line-height: 36px;
+    margin-bottom: 36px;
+}
+footer {
+    padding-bottom:100px;
+}
+.skill {
+    display: flex;
+    flex-wrap: wrap;
+}
+.skill dd {
+    width: 50%;
+    margin-bottom: 100px;
+}
+.apply-info p {
+    position: absolute;
+    left: 69px;
+    top: 60px;
+    height: 38px;
+}
+.apply-info span {
+    font-size: 41px;
+    color: #fff;
+    display: inline-block;
+}
+.apply-info span:first-child {
+    vertical-align: bottom;
+    height: 93px;
+}
+.apply-info span:nth-child(2) {
+    width: 71px;
+    text-align: right;
+}
+.skill h5 {
+    font-size: 22px;
+
+}
