@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/modal.css">
+    <!--<script>-->
+        <!--less = {-->
+            <!--env: "development",-->
+            <!--async: false,-->
+            <!--fileAsync: false,-->
+            <!--poll: 1000,-->
+            <!--functions: {},-->
+            <!--dumpLineNumbers: "comments",-->
+            <!--relativeUrls: false,-->
+            <!--rootpath: ":/a.com/"-->
+        <!--};-->
+    <!--</script>-->
+    <!--<script src="http://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>-->
+    <!--<script>less.watch();</script>-->
+    <title>Title</title>
+</head>
+<body>
+    <button class="btn">点我1</button>
+    <div class="modal_box">
+        <div class="modal">
+            <div class="modal-header">
+                <h5 >我是标题1</h5>
+                <a class="close-modal">×</a>
+            </div>
+            <div class="modal-main">
+                <p>我是内容1</p>
+                <p>我是内容1</p>
+            </div>
+            <div class="modal-footer">
+                <a class="close-modal">取消</a>
+                <a>确定</a>
+            </div>
+        </div>
+        <div class="marsklayer"></div>
+    </div>
+    <script>
+        window.onload=function () {
+            var btn = document.querySelector(".btn");
+            var modal = document.querySelector(".modal_box");
+            btn.onclick = function () {
+                modal.style.display = "block"
+            };
+            document.onclick = function(ev){
+                var ev = ev||event;
+                var target = ev.target || ev.srcElement;
+                var ecname = target.className;
+                if(ecname=="close-modal"||ecname=="marsklayer"){
+                    modal.style.display = "none"
+                }
+            }
+        }
+    </script>
+</body>
+</html>
