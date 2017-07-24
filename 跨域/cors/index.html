@@ -24,17 +24,15 @@
 <script>
 
     $('.change').addEventListener('click', function(){
-
         var xhr = new XMLHttpRequest();
-        xhr.open('get', 'http://localhost:8080/getNews', true);
-        xhr.send();
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState === 4 && xhr.status === 200){
-                appendHtml( JSON.parse(xhr.responseText) )
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState==4 && (xhr.status == 200||xhr.status==304) ){
+                var data = JSON.parse(xhr.responseText);
+                appendHtml(data)
             }
         }
-        window.xhr = xhr
-
+        xhr.open('get','http://localhost:3000/getNews',true)
+        xhr.send();
     })
 
     function appendHtml(news){
@@ -42,7 +40,7 @@
         for( var i=0; i<news.length; i++){
             html += '<li>' + news[i] + '</li>';
         }
-        console.log(html);
+
         $('.news').innerHTML = html;
 
     }

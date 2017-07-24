@@ -7,7 +7,7 @@ function setRouter(app){
 
 
 app.get('/getNews', function(req, res){
-    console.log(req +":"+res);
+
     var news = [
         "第11日前瞻：中国冲击4金 博尔特再战200米羽球",
         "正直播柴飚/洪炜出战 男双力争会师决赛",
@@ -22,14 +22,11 @@ app.get('/getNews', function(req, res){
     for(var i=0; i<3; i++){
         var index = parseInt(Math.random()*news.length);
         data.push(news[index]);
-        news.splice(index, 1);
+        news.splice(index,1);
     }
-
-
-    var cb = req.query.callback;
-    console.log(cb);
+    var cb = req.query.callback;//appendHtml
     if(cb){
-        res.send(cb + '('+ JSON.stringify(data) + ')');
+       res.send(cb+"("+JSON.stringify(data)+")");
     }else{
         res.send(data);
     }

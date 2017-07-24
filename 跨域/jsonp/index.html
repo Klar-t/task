@@ -18,30 +18,24 @@
         <li>男双力争会师决赛 </li>
         <li>女排将死磕巴西！</li>
     </ul>
-    <button class="change">换一组</button>
+    <button class="change" id="change">换一组</button>
 </div>
 
 <script>
-
-    $('.change').addEventListener('click', function(){
-        var script = document.createElement('script');
-        script.src = 'http://localhost:3000/getNews?callback=appendHtml';
-        document.head.appendChild(script);
-        document.head.removeChild(script);
-    })
-
-    function appendHtml(news){
-        console.log(news)
-        var html = '';
-        for( var i=0; i<news.length; i++){
-            html += '<li>' + news[i] + '</li>';
-        }
-        console.log(html);
-        $('.news').innerHTML = html;
+    $(".change").onclick=function () {
+       var cscript = document.createElement('script');
+        cscript.src = "http:127.0.0.1:3000/getNews?callback=appendHtml";
+        document.head.appendChild(cscript);
+        document.head.removeChild(cscript);
     }
-
-
-    function $(id){
+    function appendHtml(data){
+        var html ="";
+        for(var i = 0;i<data.length;i++){
+            html+="<li>"+data[i]+"</li>"
+        }
+        $(".news").innerHTML=html;
+    }
+    function $(id) {
         return document.querySelector(id);
     }
 </script>

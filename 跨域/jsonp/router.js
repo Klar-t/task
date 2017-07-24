@@ -19,13 +19,11 @@ app.get('/getNews', function(req, res){
     for(var i=0; i<3; i++){
         var index = parseInt(Math.random()*news.length);
         data.push(news[index]);
-        news.splice(index, 1);
+        news.splice(index,1);
     }
-
-
     var cb = req.query.callback;//appendHtml
     if(cb){
-        res.send(cb + '('+ JSON.stringify(data) + ')');
+       res.send(cb+"("+JSON.stringify(data)+")");
     }else{
         res.send(data);
     }

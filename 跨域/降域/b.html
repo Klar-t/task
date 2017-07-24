@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,17 +13,12 @@
         width: 200px;
     }
 </style>
-
-<input id="input" type="text"  placeholder="http://b.jrg.com:8080/b.html">
+<input id="input" type="text"  placeholder="http://b.jrg.com:3000/b.html">
 <script>
-
-    // URL: http://b.jrg.com:8080/b.html
-
+    // URL: http://b.jrg.com:3000/b.html
     document.querySelector('#input').addEventListener('input', function(){
         window.parent.document.querySelector('input').value = this.value;
-    })
-
+    });
     document.domain = 'jrg.com';
-
 </script>
 </html>

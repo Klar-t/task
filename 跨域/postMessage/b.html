@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<style>
+    html,body{
+        margin: 0;
+    }
+    input{
+        margin: 20px;
+        width: 200px;
+    }
+</style>
+
+<input id="binput" type="text"  placeholder="http://b.jrg.com:3000/b.html">
+<script>
+    // URL: http://b.jrg.com:3000/b.html
+    binput.addEventListener('input',function () {
+        var val = this.value;
+        window.parent.postMessage(val,"*");
+    });
+    window.addEventListener('message',function (e) {
+        binput.value=e.data;
+    })
+</script>
+</html>

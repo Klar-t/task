@@ -2,8 +2,6 @@
 <html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <style>
     .ct{
         width: 910px;
@@ -19,6 +17,9 @@
         margin: 20px;
         width: 200px;
     }
+    .iframe{
+        float: right;
+    }
     iframe{
         width: 450px;
         height: 300px;
@@ -26,20 +27,20 @@
     }
 </style>
 <div class="ct">
-    <h1>使用降域实现跨域</h1>
+    <h1>使用postMessage实现跨域</h1>
     <div class="main">
-        <input type="text" placeholder="http://a.jrg.com:8080/a.html">
+        <input type="text" placeholder="http://a.jrg.com:3000/a.html" id="ainput">
     </div>
     <iframe src="http://b.jrg.com:3000/b.html" frameborder="0" ></iframe>
 </div>
 <script>
     //URL: http://a.jrg.com:3000/a.html
-    document.querySelector('.main input').addEventListener('input', function(){
-        console.log(window.frames[0].window);
-        window.frames[0].document.querySelector('input').value = this.value;
+    ainput.addEventListener('input',function () {
+        var val = this.value;
+        window.frames[0].postMessage(val,"*");
     });
-    document.domain = "jrg.com"
+    window.addEventListener('message',function (e) {
+        ainput.value=e.data;
+    })
 </script>
 </html>
-
-
