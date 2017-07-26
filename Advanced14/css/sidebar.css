@@ -1,0 +1,54 @@
+@charset "utf-8";
+body {
+  font-family: 'Microsoft YaHei';
+}
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar {
+  background: #c7171e;
+  width: 200px;
+}
+.sidebar > li {
+  position: relative;
+}
+.sidebar > li > a {
+  padding: 10px;
+  margin: 0 10px;
+  border-bottom: 1px dotted  #de272e;
+  color: #fff;
+  display: block;
+  font-size: 14px;
+}
+.sidebar a {
+  text-decoration: none;
+}
+.sidebar span {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+.sidebar .child-panel {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 210px;
+  background: #fff;
+  border: 1px solid #ccc;
+  display: none;
+  font-size: 12px;
+}
+.sidebar .child-panel li {
+  width: 55px;
+  float: left;
+  padding: 10px;
+}
+.sidebar .child-panel a {
+  font-size: 12px;
+  color: #333;
+}

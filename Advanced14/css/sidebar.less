@@ -1,0 +1,55 @@
+@charset "utf-8";
+@base:#c7171e;
+@colf:#fff;
+body {
+  font-family: 'Microsoft YaHei';
+}
+ul,li {
+  list-style: none;
+  padding:0;
+  margin:0;
+}
+.sidebar {
+  background: @base;
+  width: 200px;
+  &>li {
+    position: relative;
+  }
+  &>li>a{
+    padding: 10px;
+    margin:0 10px;
+    border-bottom: 1px dotted  #de272e;
+    color: @colf;
+    display: block;
+    font-size: 14px;
+  }
+  a {
+    text-decoration: none;
+  }
+  span {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 14px;
+    color:@colf;
+  }
+  .child-panel {
+    position: absolute;
+    left: 100%;
+    top:0;
+    width: 210px;
+    background:@colf;
+    border: 1px solid #ccc;
+    display: none;
+    font-size: 12px;
+    li {
+      width: 55px;
+      float: left;
+      padding:10px
+    }
+    a{
+      font-size: 12px;
+      color: #333;
+    }
+  }
+}

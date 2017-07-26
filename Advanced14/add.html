@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/tab-hover.css">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <h2>珠宝首饰</h2>
+    <div class="panel panel-add">
+        <ul>
+            <li>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="产品展示">
+                <p>文字描述</p>
+                <strong>￥699.00</strong>
+                <p class="masker">
+                    <a href="">立即抢购</a>
+                </p>
+            </li>
+            <li>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="产品展示">
+                <p>文字描述</p>
+                <strong>￥699.00</strong>
+                <p class="masker">
+                    <a href="">立即抢购</a>
+                </p>
+            </li>
+            <li>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="产品展示">
+                <p>文字描述</p>
+                <strong>￥699.00</strong>
+                <p class="masker">
+                    <a href="">立即抢购</a>
+                </p>
+            </li>
+            <li>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="产品展示">
+                <p>文字描述</p>
+                <strong>￥699.00</strong>
+                <p class="masker">
+                    <a href="">立即抢购</a>
+                </p>
+            </li>
+            <li>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="产品展示">
+                <p>文字描述</p>
+                <strong>￥699.00</strong>
+                <p class="masker">
+                    <a href="">立即抢购</a>
+                </p>
+            </li>
+            <li>
+                <img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="产品展示">
+                <p>文字描述</p>
+                <strong>￥699.00</strong>
+                <p class="masker">
+                    <a href="">立即抢购</a>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <button class="btn add">添加</button>
+</main>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var products = [ { img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg', name: '珂兰 黄金手 猴哥款', price: '￥405.00' },{ img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg', name: '珂兰 黄金转运珠 猴哥款', price: '￥100.00' },{ img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg', name: '珂兰 黄金手链 3D猴哥款', price: '￥45.00' }];
+        $(".add").click(function () {
+            for(var i =0;i<products.length;i++){
+                var html =  '<li>' +
+                    '<img src="'+products[i]["img"]+'" alt="产品展示">' +
+                    '<p>'+products[i]["name"]+'</p>' +
+                    '<strong>'+products[i]["price"]+'</strong>' +
+                    '<p class="masker">' +
+                    '<a href="">立即抢购</a>' +
+                    ' </p>' +
+                    '</li>';
+                $(".panel ul").append($(html))
+
+
+            }
+        })
+    })
+</script>
+</body>
+</html>
