@@ -184,7 +184,7 @@
         function getweather(querycity) {
             $.ajax({
                 type:"get",
-                url:"http://jirenguapi.applinzi.com/weather.php?city="+querycity+"",
+                url:"https://jirenguapi.applinzi.com/weather.php?city="+querycity+"",
                 dataType:"jsonp",
                 success : function(json){
                     var weather_date = json['results'][0]['weather_data'];//算上今天后面三天的天气；
