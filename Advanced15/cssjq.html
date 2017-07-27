@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/cssjq.css">
+    <title>Document</title>
+</head>
+<body>
+<div class="wraper">
+    <button>click me</button>
+    <div class="box">mouseenter</div>
+    <p class="posfix">
+        <span>窗口滚动条垂直位置</span>
+        <a></a>
+    </p>
+    <input type="text">
+    <br>
+    <div class="selectbox">
+        <select name="" id="">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+    <p class="chooseval">
+        您选择了 <span></span>
+    </p>
+</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //点击按钮变色
+        $("button").click(function () {
+              $(this).addClass("on")  ;
+              var $this = $(this);
+              setTimeout(function () {
+                  $this.addClass("finishcolor");
+              },1000)
+        });
+        //盒子悬停变色
+        $(".box").hover(function () {
+            $(this).toggleClass("on")
+        });
+        //输入框
+        $("input").on({
+            "focus":function () {
+                $(this).addClass("focus")
+            },
+            "input propertychange":function () {
+                $(this).val($(this).val().toUpperCase())
+            },
+            "blur":function () {
+                $(this).removeClass("focus");
+                console.log($(this).val())
+            }
+        });
+        //下拉取值
+        $("select").change(function () {
+            var val =$(this).val();
+            $(".chooseval span").text(val)
+        })
+        //滚动位置
+        $(window).scroll(function () {
+            $(".posfix a").text($(document).scrollTop())
+        })
+
+    })
+</script>
+</body>
+</html>

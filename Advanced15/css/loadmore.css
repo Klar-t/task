@@ -1,0 +1,36 @@
+@charset "utf-8";
+body {
+  font-family: "Microsoft YaHei";
+}
+#loadBox {
+  padding: 0;
+}
+#loadBox li {
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  list-style: none;
+  cursor: pointer;
+}
+#loadBox li.hover{
+  background: green;
+}
+#btn {
+  border: 1px solid #E27272;
+  width: 80px;
+  height: 40px;
+  line-height:38px;
+  color: #E27272;
+  cursor: pointer;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 2px;
+  display: block;
+  outline: none;
+  box-sizing: border-box;
+}
+.loading {
+  background: url("../images/loading.gif") no-repeat center center/auto 100% ;
+}
+

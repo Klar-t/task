@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/loadmore.css">
+    <title>load-more</title>
+</head>
+<body>
+    <ul id="loadBox">
+        <li>内容1</li>
+        <li>内容2</li>
+    </ul>
+    <button id="btn">加载更多</button>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+$(document).ready(function () {
+    //加载更多
+    var start = 2;
+    $("#btn").click(function () {
+        if($(this).data("loading")){
+            return
+        }
+
+        $(this).data("loading",true)
+            .text("")
+            .addClass("loading");
+
+        var $this=$(this)
+        $.ajax({
+            method:"get",
+            url:"loadmore",
+            data:{
+                start:start,
+                len:5
+            }
+        }).success(function (result) {
+            var html="";
+            for(var i =0;i<result.length;i++){
+                html+="<li>"+result[i]+"</li>"
+            }
+            $("#loadBox").append(html);
+            $this.data("loading",false)
+                .text("加载更多")
+                .removeClass("loading");
+            start+=5;
+        }).error(function () {
+            alert("加载失败");
+            $this.data("loading",false)
+                .text("加载更多")
+                .removeClass("loading");
+        })
+    })
+    //悬停
+    $('#loadBox').on("mouseenter mouseleave","li",function () {
+        $(this).toggleClass("hover")
+    })
+})
+</script>
+</html>

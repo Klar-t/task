@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/getWeahter.css">
+    <title>Title</title>
+</head>
+<body>
+<div class="wraper">
+    <div class="weaher-box">
+        <header>
+            <div class="left">
+                <input type="text" placeholder="请输入您想要查询的城市">
+                <ul>
+                    <li class="li0">
+                        <svg class="icon"  aria-hidden="true">
+                            <use xlink:href="#icon-sun"></use>
+                        </svg>
+                        <span>WEATHER</span>
+                    </li>
+                    <li class="li1">
+                        <svg class="icon"  aria-hidden="true">
+                            <use xlink:href="#icon-plane"></use>
+                        </svg>
+                        <span>NEW & EVENTS</span>
+                    </li>
+                    <li class="li2">
+                        <svg class="icon"  aria-hidden="true">
+                            <use xlink:href="#icon-iconfontxiangce"></use>
+                        </svg>
+                        <span>GALLERY(30)</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right">
+                <ul>
+                    <li>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-dingwei"></use>
+                        </svg>
+                    </li>
+                    <li class="city">tianjin</li>
+                    <li class="time">20:15pm</li>
+                </ul>
+                <p class="lastpos">
+                    <span>latest locations</span>
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-ditu1"></use>
+                    </svg>
+                </p>
+            </div>
+        </header>
+        <footer>
+            <ul>
+                <li class="today">
+                    <p>
+                        <strong><span>27</span> <sup>°</sup></strong>
+                        <span class="date">MONDAY 27 <sup>th</sup></span>
+                    </p>
+                    <p>
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-kongqiyutian"></use>
+                        </svg>
+                        <span class="high">32° /</span>
+                        <span class="low">24°</span>
+                    </p>
+                </li>
+                <li>
+                    <dl>
+                        <dt>tue</dt>
+                        <dl>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-tianqi"></use>
+                            </svg>
+                        </dl>
+                        <dl>
+                            <p><span class="high">32°/ </span><span class="low">24°</span></p>
+                        </dl>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>tue</dt>
+                        <dl>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-tianqi"></use>
+                            </svg>
+                        </dl>
+                        <dl>
+                            <p><span class="high">32°/ </span><span class="low">24°</span></p>
+                        </dl>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>tue</dt>
+                        <dl>
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-tianqi"></use>
+                            </svg>
+                        </dl>
+                        <dl>
+                            <p><span class="high">32°/ </span><span class="low">24°</span></p>
+                        </dl>
+                    </dl>
+                </li>
+            </ul>
+        </footer>
+    </div>
+    <div class="masker"></div>
+    <div class="masker1"></div>
+</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="//at.alicdn.com/t/font_dect5jobrs51xlxr.js"></script>
+<script>
+    $(document).ready(function () {
+        var querycity = "tianjin";
+        getweather(querycity);
+        $(".left input").change(function () {
+            var val = $(this).val();
+            if(val!=""){querycity = val;}
+            $(".city").html(querycity);
+            getweather(querycity);
+        })
+        function formatday(str) {
+            switch (str%7){
+                case 0 :
+                    return 'SUN';
+                    break;
+                case 1 :
+                    return 'MON';
+                    break;
+                case 2 :
+                    return 'TUE';
+                    break;
+                case 3 :
+                    return 'WED';
+                    break;
+                case 4 :
+                    return 'THU';
+                    break;
+                case 5 :
+                    return 'FIR';
+                    break;
+                case 6 :
+                    return 'SAT';
+                    break;
+            }
+        }
+        function formatdate(str) {
+            switch (str){
+                case 1:
+                    return "st";
+                    break;
+                case 2|| 12|| 22:
+                    return "nd";
+                    break;
+                case 3|| 13|| 23:
+                    return "rd";
+                    break;
+                default:
+                    return "th";
+                    break;
+            }
+        }
+        function formatweather(str) {
+            switch (str){
+                case "多云":
+                    return "#icon-duoyun";
+                    break;
+                case "多云转阴":
+                    return "#icon-duoyunzhuanyin";
+                    break;
+                case "阴":
+                    return "#icon-yincopy";
+                    break;
+                case "晴":
+                    return "#icon-tianqi-qing";
+                    break;
+            }
+        }
+        function getweather(querycity) {
+            $.ajax({
+                type:"get",
+                url:"http://jirenguapi.applinzi.com/weather.php?city="+querycity+"",
+                dataType:"jsonp",
+                success : function(json){
+                    var weather_date = json['results'][0]['weather_data'];//算上今天后面三天的天气；
+                    var reg = /：\d+/;
+                    var nowweather = weather_date[0]['date'].match(reg)[0].replace("：","");
+                    var d = new Date();
+                    var   day= d.getDay() ;
+                    var date = d.getDate();
+                    var today;
+                    var tdate;
+                    $(".today strong span").text(nowweather);
+                    today =   formatday(day);
+                    tdate = formatdate(date);
+                    $(".today .date").html(today + " " + date + ' <sup>'+tdate+'</sup>');
+                    for(var i =0;i<4;i++){
+                        var temp = weather_date[i]['temperature'].split("~");
+                        var weather = weather_date[i]['weather'];
+                        $($("footer li")[i]).find(".high").html(temp[0]+"℃ /");
+                        $($("footer li")[i]).find(".low").html(temp[1]);
+                        $($("footer li")[i]).find("use").attr("xlink:href",formatweather(weather));
+                        if(i>0){
+                            var  futureday = ++day;
+                            futureday= formatday(futureday);
+                            $($("footer li")[i]).find("dt").html(futureday);
+                        }
+                    }
+                }
+            })
+        }
+    })
+</script>
+</body>
+</html>

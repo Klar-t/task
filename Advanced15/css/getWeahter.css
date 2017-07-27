@@ -1,0 +1,226 @@
+@charset "utf-8";
+.wh100 {
+  width: 100%;
+  height: 100%;
+}
+.pscenter {
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+.align-middle {
+  vertical-align: middle;
+}
+ul,
+li,
+dl,
+dd,
+dt {
+  list-style: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  font-family: "Arial";
+  overflow: hidden;
+}
+.masker,
+.masker1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: url("../images/tianjin.png") no-repeat top center / 100% auto;
+}
+.masker1 {
+  background: #000;
+  opacity: 0.8;
+  z-index: 1;
+}
+.weaher-box {
+  position: absolute;
+  z-index: 2;
+  border-radius: 8px;
+  box-sizing: border-box;
+  width: 1000px;
+  height: 660px;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+header {
+  width: 1000px;
+  height: 460px;
+  background: url("../images/tianjin.png") no-repeat center top / 100% auto;
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+header .left {
+  float: left;
+  height: 100%;
+  width: 50%;
+  position: relative;
+}
+header .left input {
+  background: transparent;
+  font-size: 24px;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  padding-left: 52px ;
+}
+header .left ul {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+header .left ul li {
+  flex-grow: 1;
+  color: #fff;
+  text-align: center;
+  width: 33.3%;
+  padding-bottom: 20px;
+}
+header .left ul li .icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+header .left ul li span {
+  vertical-align: middle;
+}
+header .left ul .li0 {
+  border-bottom: 6px solid #f5c650;
+}
+header .left ul .li1 {
+  border-bottom: 6px solid #99a2e7;
+}
+header .left ul .li2 {
+  border-bottom: 6px solid #66d0e6;
+}
+header .right {
+  float: right;
+}
+header .right ul {
+  padding-right: 50px;
+}
+header .right ul li {
+  text-align: right;
+  color: #fff;
+  font-size: 20px;
+}
+header .right .lastpos {
+  margin-top: 190px;
+  width: 216px;
+  height: 42px;
+  background: #77ca60;
+  border-top-left-radius: 21px ;
+  border-bottom-left-radius: 21px ;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
+}
+header .right .lastpos .icon {
+  width: 18px;
+  height: 16px;
+}
+header .right .lastpos span,
+header .right .lastpos .icon {
+  vertical-align: middle;
+}
+footer {
+  width: 100%;
+  height: 205px;
+  background: rgba(255, 255, 255, 0.3);
+}
+footer ul {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+footer ul li {
+  float: left;
+  flex: 1;
+  border-left: 1px solid #ac9e93;
+  height: 100%;
+  text-align: center;
+  padding-top: 46px;
+}
+footer ul li dt {
+  width: 46px;
+  height: 24px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  line-height: 24px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 19px;
+  font-size: 14px;
+}
+footer ul li dd {
+  margin-bottom: 16px;
+}
+footer ul li:first-child {
+  flex-grow: 3;
+  border-left: 0;
+  padding: 34px 0 34px 50px;
+}
+footer ul li:first-child .icon {
+  width: 100px;
+  height: 90px;
+  fill: #fff;
+  display: block;
+}
+footer ul li:first-child p {
+  display: inline-block;
+}
+footer ul li:first-child p:first-child {
+  width: 120px;
+  text-align: center;
+  margin-right: 30px;
+}
+footer ul li:first-child p:first-child strong {
+  font-size: 80px;
+  font-weight: normal;
+  display: block;
+  margin-left: 14px;
+  position: relative;
+}
+footer ul li:first-child p:first-child strong span {
+  text-shadow: 1px 1px 2px #615f5f ;
+}
+footer ul li:first-child p:first-child strong sup {
+  position: absolute;
+  top: 0;
+  right: -15px;
+  font-size: 47px;
+}
+footer ul li:first-child p:first-child .date {
+  background: rgba(0, 0, 0, 0.3);
+  width: 120px;
+  height: 32px;
+  border-radius: 18px;
+  font-size: 12px;
+  display: inline-block;
+  line-height: 24px;
+}
+.icon {
+  width: 40px;
+  height: 40px;
+  fill: #fff;
+}
+.heigh,
+.low {
+  font-size: 18px;
+  line-height: 32px;
+}
