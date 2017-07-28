@@ -35,7 +35,7 @@ html {
   width: 100%;
   height: 100%;
   z-index: 0;
-  background: url("../images/tianjin.png") no-repeat top center / 100% auto;
+  background: url("../images/tianjin.png") no-repeat center center / 100% 100%;
 }
 .masker1 {
   background: #000;
@@ -67,22 +67,65 @@ header .left {
   width: 50%;
   position: relative;
 }
-header .left input {
+header .left .selectbox {
   background: transparent;
   font-size: 24px;
   color: #fff;
   border: 0;
   outline: 0;
-  padding-left: 52px ;
+  width: 270px;
+  padding-left: 52px;
 }
-header .left ul {
+.selectbox .select2-container{
+  width: 100%!important;
+
+}
+.selectbox .select2-container--default .select2-selection--multiple,
+.selectbox .select2-container--default.select2-container--focus .select2-selection--multiple
+{
+  border: 0;
+  background: none;
+}
+.select2-dropdown {
+  background: rgba(255,255,255,.3);
+}
+.selectbox .select2-container--default .select2-selection--multiple .select2-selection__rendered li{
+ border: 0;
+  background: none;
+}
+.selectbox .select2-container--default .select2-selection--multiple .select2-selection__rendered li span {
+  display: none;
+}
+.selectbox .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+  line-height: 1.1;
+}
+.mCustomScrollBox {
+  height: 150px;
+}
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar,
+.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar
+{
+  background-color: rgba(0,0,0,.6);
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: rgba(0,0,0,.3);
+}
+.mCSB_inside > .mCSB_container {
+  margin-right:0;
+}
+.mCSB_scrollTools {
+  right: -6px;
+}
+header .left > ul {
   position: absolute;
   bottom: 0;
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
-header .left ul li {
+header .left> ul> li {
   flex-grow: 1;
   color: #fff;
   text-align: center;
@@ -111,11 +154,15 @@ header .right {
 }
 header .right ul {
   padding-right: 50px;
+  height: 70px;
 }
 header .right ul li {
   text-align: right;
   color: #fff;
   font-size: 20px;
+}
+.city {
+  height: 30px;
 }
 header .right .lastpos {
   margin-top: 190px;

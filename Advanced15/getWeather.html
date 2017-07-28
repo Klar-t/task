@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="js/select2/css/select2.css">
+    <link rel="stylesheet" href="js/custom-scrollbar/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="css/getWeahter.css">
     <title>Title</title>
 </head>
@@ -12,7 +14,12 @@
     <div class="weaher-box">
         <header>
             <div class="left">
-                <input type="text" placeholder="请输入您想要查询的城市">
+                <div class="selectbox">
+                    <select multiple class="choosecity">
+                        <option value=""></option>
+                    </select>
+                </div>
+
                 <ul>
                     <li class="li0">
                         <svg class="icon"  aria-hidden="true">
@@ -110,12 +117,47 @@
         </footer>
     </div>
     <div class="masker"></div>
-    <div class="masker1"></div>
+    <div class="masker1">
+        <a></a>
+    </div>
 </div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="//at.alicdn.com/t/font_dect5jobrs51xlxr.js"></script>
+<!--select2-->
+<script src="js/select2/js/select2.full.min.js"></script>
+<!--scroll-->
+<script src="js/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
     $(document).ready(function () {
+        //select2调用
+        var cities = [
+                {id:"beijing",text:"BeiJing(北京)"},
+                {id:"tianjin",text:"TianJin(天津市)"},
+                {id:"shanghai",text:"ShangHai(上海市)"},
+                {id:"guangzhou",text:"GuangZhou(广州市)"},
+                {id:"shenzhen",text:"ShenZhen((深圳市)"},
+                {id:"wuhan",text:"WuHan(武汉市)"},
+                {id:"nanjing",text:"NanJing(南京市)"},
+                {id:"chengdu",text:"ChengDu(成都市)"},
+                {id:"qingdao",text:"QingDao(青岛市)"},
+                {id:"suzhou",text:"SuZhou(苏州市)"}
+            ]
+        $(".choosecity").select2({
+            placeholder: "请输入您想要查询的城市",
+            data:cities,
+            maximumSelectionLength: 1,
+        });
+        $(".choosecity").on("select2:open", function(e) {
+            $(this).find("option").attr({"selected":false});
+            $(".select2-results ul.select2-results__options").unbind("mousewheel");
+            $('.select2-results').mCustomScrollbar();
+        })
+        $(".choosecity").on("select2:close", function(e) {
+            var val = $(this).val();
+            if(val!=""&&val!=null){querycity = val[0];}
+            $(".city").html(querycity);
+            getweather(querycity);
+        })
         var querycity = "tianjin";
         getweather(querycity);
         $(".left input").change(function () {
@@ -123,7 +165,7 @@
             if(val!=""){querycity = val;}
             $(".city").html(querycity);
             getweather(querycity);
-        })
+        });
         function formatday(str) {
             switch (str%7){
                 case 0 :
@@ -214,6 +256,7 @@
                 }
             })
         }
+
     })
 </script>
 </body>
