@@ -1,0 +1,21 @@
+@charset "utf-8";
+.wraper {
+  width: 600px;
+  margin: 0 auto;
+}
+.imgbox {
+  list-style: none;
+  position: relative;
+}
+.imgbox li {
+  margin: 10px;
+  float: left;
+}
+.imgbox li img {
+  width: 240px;
+  height: 180px;
+}
+.disnone {
+  visibility: hidden;
+  clear: both;
+}
