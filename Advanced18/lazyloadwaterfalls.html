@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lazyloadwaterfalls.css">
+    <title>Title</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="ct-waterfall">
+            <ul>
+            </ul>
+            <div class="load">我是看不见的</div>
+        </div>
+    </div>
+</body>
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    //js:jsonp复习：虽然浏览器默认禁止了跨域访问，但并不禁止在页面中引用其他域的JS文件
+    //        var cscript = document.createElement('script');
+    //        cscript.src = "http://platform.sina.com.cn/slide/album_tech?jsoncallback=func&app_key=1271687855&num=3&page=4";
+    //        document.head.appendChild(cscript);
+    //          function func(data){
+    //             console.log(data)
+    //            }
+    $(document).ready(function () {
+        //1.获取数据
+        //2.画html
+        //3.瀑布布局
+        var perPageCount=10;
+        var curPage=1;
+        var flag = true;
+        checkout()
+        function checkout() {
+            flag=false;
+            $.ajax({
+                url:"http://platform.sina.com.cn/slide/album_tech",
+                dataType:"jsonp",
+                jsonp:"jsoncallback",
+                data:{
+                    app_key: '1271687855',
+                    num: perPageCount,
+                    page: curPage
+                }
+            }).done(function (ret) {
+                if(ret && ret.status && ret.status.code==="0"){
+                    domrender(ret.data);
+                    curPage++;
+                    flag=true;
+                }else{
+                    console.log('get error data');
+                }
+            });
+        }
+        //渲染多个dom
+        function domrender(data) {
+            $.each(data,function (i,item) {
+                var $node =   getNode(data[i]);
+                var totalH ;
+                $node.find("img").load(function () {
+                    $(".ct-waterfall ul").append($node).height(totalH);
+                    waterfalls();
+                })
+            });
+
+        }
+        //取数据画每个dom
+        function getNode(nodeLists) {
+            var html="";
+                html+='<li class="item" >' +
+                    '<a href="'+nodeLists["cmnt_url"]+'" class="link">' +
+                    '<img src="'+nodeLists["img_url"]+'" alt="">' +
+                    ' </a>' +
+                    ' <h4 class="header">'+nodeLists["short_name"]+'</h4>' +
+                    '<p class="desp">'+nodeLists["short_intro"]+'</p>' +
+                    '</li>';
+
+             return $(html)
+        }
+        //瀑布结构
+        function waterfalls() {
+            var itemArray = [];
+            var itemW = $(".item").outerWidth(true);
+            var len = parseInt($(".ct-waterfall").width()/itemW);
+            var boxH  ;
+            for(var i=0;i<len;i++){
+                itemArray[i]=0;
+            }
+            $(".item").each(function () {
+                var minValue = Math.min.apply(null,itemArray);
+                var minIndex = itemArray.indexOf(minValue);
+                var boxH ;
+                $(this).css({
+                    "top":itemArray[minIndex],
+                    "left":itemW*minIndex,
+                    "opacity":"1"
+                });
+                itemArray[minIndex]+=$(this).outerHeight(true);
+                boxH = Math.max.apply(null,itemArray);
+                $(".ct-waterfall ul").height(boxH);
+            })
+
+
+        }
+        function isvisible(obj) {
+            var windowH = $(window).height();
+            var scrollH = $(window).scrollTop();
+            var elT = $(obj).offset().top;
+            var elH = $(obj).height();
+            if(elH +elT > scrollH && elT < windowH + scrollH){
+                return true
+            }else{
+                return false
+            }
+        }
+        //滚动
+        $(window).scroll(function () {
+            if(!!isvisible($(".load"))&&!!flag){
+                checkout();
+            }
+        });
+
+    })
+
+
+</script>
+</html>
