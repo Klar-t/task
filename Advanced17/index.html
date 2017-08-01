@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/index.css">
+    <title>轮播</title>
+</head>
+<body>
+<div class="carousel">
+    <ul class="gallery">
+        <li><a href="#"><img src="images/1.jpg" alt=""></a></li>
+        <li><a href="#"><img src="images/2.jpg" alt=""></a></li>
+        <li><a href="#"><img src="images/3.jpg" alt=""></a></li>
+        <li><a href="#"><img src="images/4.jpg" alt=""></a></li>
+    </ul>
+    <a href="#" class="prev"> < </a>
+    <a href="#" class="next"> > </a>
+    <ul class="bullet">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var $gallery = $(".gallery");
+        var $imgs = $(".gallery li");
+        var $prev = $(".prev");
+        var $next = $(".next");
+        var $bullets = $(".bullet li");
+        var len = $imgs.length;
+        var imgw = $imgs.width();
+        var pageindex = 0;
+        var isAnimate = false;
+        //初始宽度和位置
+        $gallery.prepend($gallery.find("li").eq(len-1).clone());
+        $gallery.append($gallery.find("li").eq(1).clone());
+        $gallery.width(imgw*(len+2)).css({"left":-imgw});
+
+        $next.click(function () {
+            next(1)
+        });
+        $prev.click(function () {
+            prev(1)
+        });
+        $bullets.click(function () {
+            var index = $(this).index();
+            if(index>pageindex){
+                next(index-pageindex)
+            }else if(index<pageindex){
+                prev(pageindex-index)
+            }
+        });
+        function next(movelen) {
+            if(isAnimate){return}
+            isAnimate=true;
+            $gallery.animate({"left":"-="+movelen*imgw},function () {//视觉上还是播放下一张，但是运动停止后变成视觉上的第一张。
+                pageindex += movelen;
+                if(pageindex==len){
+                    pageindex=0;
+                    $gallery.css({"left":-imgw});
+                }
+                bullet();
+                isAnimate=false;
+            })
+        }
+        function prev(movelen){
+            if(isAnimate){return}
+            isAnimate=true;
+            $gallery.animate({"left":"+="+movelen*imgw},function () {
+                pageindex-=movelen;
+                if(pageindex==-1){
+                    pageindex=len-1;
+                    $gallery.css({"left":-len*imgw});
+                }
+                bullet();
+                isAnimate=false;
+            })
+        }
+        function bullet() {
+            $bullets.removeClass("active")
+                    .eq(pageindex)
+                    .addClass("active");
+        }
+
+    })
+</script>
+</body>
+</html>
