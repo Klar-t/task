@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var template = '<p>Hello, my name is <%this.name%>. I\'m <%this.profile.age%> years old.</p>';
+    var data = {
+        name: "lili",
+        profile: { age: 30 }
+    };
+    function TemplateEngine(tpl,data) {
+       var reg = /<%([^%>]+)?%>/g;
+       var code = 'var arr=[];\n',
+            cur=0;
+       while(match = reg.exec(tpl)){
+           var x =   tpl.slice(cur,cur+match['index']);
+           add(tpl.slice(cur,match['index']));
+           add(match[1],true);
+           cur=match['index']+match[0].length;
+       }
+       add(tpl.slice(cur));
+       code+="return arr.join(\"\")";
+        function add(line ,js) {
+            js?code+="arr.push("+line+");\n":
+            code+="arr.push(\""+line.replace('\"','\\"')+"\");\n";
+        }
+        return new Function(code).apply(data);
+    }
+ /*   var TemplateEngine = function(tpl, data) {
+        var re = /<%([^%>]+)?%>/g,
+            code = 'var Arr=[];\n',
+            cursor = 0;
+        var add = function(line,js) {
+            js?code += 'Arr.push(' + line + ');\n' :
+            code += 'Arr.push("' + line.replace(/"/g, '\\"') + '");\n';
+        }
+        while(match = re.exec(tpl)) {
+            add(tpl.slice(cursor, match.index));
+            add(match[1],true);
+            cursor = match.index + match[0].length;
+        }
+        add(tpl.substr(cursor, tpl.length - cursor));
+        code += 'return Arr.join("");'; // <-- return the result
+        console.log(code);
+        return new Function(code.replace(/[\r\t\n]/g, '')).apply(data);
+    }
+*/
+
+    console.log(TemplateEngine(template, data));
+</script>
+
+
+</body>
+</html>

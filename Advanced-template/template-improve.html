@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模板引擎升级版</title>
+</head>
+<body>
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var string =
+            '<div class="song-list">' +
+            '<h1>热歌榜</h1>' +
+           '<ol>' +
+            '<% for (var i =0;i<songs.length;i++) {%>' +
+        '<li><%songs[i].name%> -  <%songs[i].singer%></li>' +
+            '<%}%>' +
+        '</ol>' +
+        '</div>';
+        var data = {
+            songs:songs
+        };
+        var songs = [
+            {name:'刚刚好 ', singer:'薛之谦', url: 'http://music.163.com/xxx'},
+            {name:'最佳歌手 ', singer:'许嵩', url: 'http://music.163.com/xxx'},
+            {name:'初学者 ', singer:'薛之谦', url: 'http://music.163.com/xxx'},
+            {name:'绅士 ', singer:'薛之谦', url: 'http://music.163.com/xxx'},
+            {name:'我门 ', singer:'陈伟霆', url: 'http://music.163.com/xxx'},
+            {name:'画风 ', singer:'后弦', url: 'http://music.163.com/xxx'},
+            {name:'We Are One ', singer:'郁可唯', url: 'http://music.163.com/xxx'}
+        ];
+        var getfun = 'html=\''+template(string)+'\'';
+
+        function template(string) {
+            var reg = /<%.*%>/g;
+            var songs = data.songs;
+            var jscript = string.replace(reg,function (match,index,input) {
+                var  regex = /<%|%>/g;
+                var regli = /<li>|<\/li>/g;
+                var js ="\';"+match.replace(regex,"").replace(/<li>/,"html+='<li>'+").replace(/<\/li>/,"+'<\/li>'").replace(/-/,"+'-'+") +";html+=\'";
+                return js;
+            });
+            return jscript
+        }
+        var fun = new Function('songs',getfun);
+        fun(songs);
+        document.body.innerHTML =html;
+    })
+</script>
+</body>
+</html>

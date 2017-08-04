@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var TemplateEngine = function(html,options) {
+        var re = /<%([^%>]+)?%>/g,
+            reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
+            code = 'var Arr=[];\n',
+            cursor = 0;
+        var add = function(line, js) {
+            js? (code += line.match(reExp) ? line + '\n' : 'Arr.push(' + line + ');\n') :
+                (code += line != '' ? 'Arr.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
+            return add;
+        };
+        while(match = re.exec(html)) {
+            add(html.slice(cursor, match.index));
+            add(match[1], true);
+            cursor = match.index + match[0].length;
+        }
+        add(html.substr(cursor, html.length - cursor));
+        code += "console.log(this);\n";
+        code += 'return Arr.join("");';
+        return new Function (code.replace(/[\r\t\n]/g, '')).apply(null,songs);
+    };
+    var songs =[
+        {name:'刚刚好', singer:'薛之谦', url:'http://music.163.com/xxx'},
+        {name:'最佳歌手', singer:'许嵩', url:'http://music.163.com/xxx'},
+        {name:'初学者', singer:'薛之谦', url:'http://music.163.com/xxx'},
+        {name:'绅士', singer:'薛之谦', url:'http://music.163.com/xxx'},
+        {name:'我们', singer:'陈伟霆', url:'http://music.163.com/xxx'},
+        {name:'画风', singer:'后弦', url:'http://music.163.com/xxx'},
+        {name:'We Are One', singer:'郁可唯', url:'http://music.163.com/xxx'}
+    ];
+    var html =
+        '<div class="song-list">'+
+        '  <h1>热歌榜</h1>'+
+        '  <ol>'+
+        '<%for(var i=0; i<this.songs.length;i++){%>'+
+        '<li><%this.songs[i].name%> - <%this.songs[i].singer%></li>'+
+        '<%}%>'+
+        '  </ol>'+
+        '</div>';
+
+    var results =TemplateEngine (html,songs);
+
+    console.log(results);
+    document.body.innerHTML = results;
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var TemplateEngine = function(tpl, data) {
+        var regex = /<%([^%>]+)?%>/g; //进行（）分组后，match[1]出括号里面的内容；
+        while(match = regex.exec(tpl)) {
+            console.log(match);
+            tpl = tpl.replace(match[0], data[match[1]])
+        }
+        return tpl;
+    };
+    var template = '<p>Hello, my name is <%name%>. I\'m <%age%> years old.</p>';
+    var data = {
+        name: "frank",
+        age: 18,
+        gender: 'male'
+    };
+    var string = TemplateEngine(template, data);
+    console.log(string)
+</script>
+</body>
+</html>

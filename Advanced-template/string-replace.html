@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板引擎-字符串的替换</title>
+</head>
+<body>
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+//        js渲染歌曲列表（数据来自数组）
+//		textContent 新出来的标准API 旧的ie不支持
+//        innerText 都支持
+//        innerHTML 容易被注入
+//        方案一、拼html：代码注入的危险
+//        方案二、生成dom对象
+//        方案三、jq
+//
+//        var params = [].slice.call(arguments,1);
+//        借用[]的slice()方法，并套用在arguments上
+        var songs = [
+            {name:'刚刚好 ', singer:'薛之谦', url: 'http://music.163.com/xxx'},
+            {name:'最佳歌手 ', singer:'许嵩', url: 'http://music.163.com/xxx'},
+            {name:'初学者 ', singer:'薛之谦', url: 'http://music.163.com/xxx'},
+            {name:'绅士 ', singer:'薛之谦', url: 'http://music.163.com/xxx'},
+            {name:'我门 ', singer:'陈伟霆', url: 'http://music.163.com/xxx'},
+            {name:'画风 ', singer:'后弦', url: 'http://music.163.com/xxx'},
+            {name:'We Are One ', singer:'郁可唯', url: 'http://music.163.com/xxx'}
+        ];
+        var li = stringFormate('<li>{0}-{1}</li>',songs[0].name,songs[0].singer);
+
+        function stringFormate(string) {
+            var params = [].slice.call(arguments,1);
+            var reg = /{(\d+)}/g;
+            string = string.replace(reg,function (content,index,start,input) {
+                return params[index]
+            });
+         return string;
+        }
+        var $ol = $("<ol/>");
+        var $div = $("<div/>").attr({"class":"song-list"});
+        var $h1 = $('<h3>热歌榜</h3>');
+        $.each(songs,function (i,item) {
+           var $li =  stringFormate('<li>{0}-{1}</li>',songs[i].name,songs[i].singer);
+            $ol.append($li);
+        });
+        $div.append($h1);
+        $div.append($ol);
+        $("body").prepend($div)
+    })
+</script>
+</body>
+</html>
