@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .img-preview{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .img-row {
+            margin-bottom: 8px;
+        }
+        .img-row:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .img-box {
+            float: left;
+        }
+        .img-line .img-box:first-child {
+            padding-left: 0;
+        }
+        .bottom {
+            width: 100%;
+            height: 20px;
+        }
+    </style>
+    <title></title>
+</head>
+<body>
+    <div class="img-preview">
+
+    </div>
+    <div class="bottom"></div>
+    <script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        var getnum=50;
+        function Barrel($ct){
+             this.$ct = $ct;
+             this.imgNum = 40;
+             this.baseHeight = 100;
+             this.rowList = [];
+             this.loadImg();
+         }
+
+        Barrel.prototype = {
+             loadImg: function() {
+                 var _this = this;
+                 var imgUrls = this.getImgUrls(getnum);
+                 var flag = true;
+                 $(window).scroll(function () {
+                     if(!!(_this.isvisible($(".bottom")))){
+                         $.each(imgUrls,function(idx, url){//遍历地址
+
+                             var img = new Image();//创建图片
+                             img.src = url;
+                             img.onload = function(){//不同于for循环，for只能记录最后一个img;
+                                 var originWidth = img.width,
+                                     originHeight = img.height,
+                                     ratio = originWidth/originHeight;
+                                 var imgInfo = { //图片加载成功后，创建图片信息；
+                                     target: $(img),
+                                     width: _this.baseHeight*ratio,
+                                     height: _this.baseHeight,
+                                     ratio: ratio
+                                 };
+                             }
+                         });
+                     }
+                 });
+                 $.each(imgUrls,function(idx, url){//遍历地址
+                         var img = new Image();//创建图片
+                         img.src = url;
+                         img.onload = function(){//不同于for循环，for只能记录最后一个img;
+                             var originWidth = img.width,
+                                 originHeight = img.height,
+                                 ratio = originWidth/originHeight;
+
+                             var imgInfo = { //图片加载成功后，创建图片信息；
+                                 target: $(img),
+                                 width: _this.baseHeight*ratio,
+                                 height: _this.baseHeight,
+                                 ratio: ratio
+                             };
+                             _this.render(imgInfo);//渲染图片；
+                         }
+                     });
+             },
+            render: function(imgInfo){
+                 var _this = this;
+                 var rowList = this.rowList,
+                     rowWidth = 0,
+                     rowHeight = 0,
+                     clientWidth = this.$ct.width(),
+                     lastImgInfo = imgInfo;
+
+                 this.rowList.push(imgInfo);
+                 $.each(rowList,function(idx, imgInfo){
+                     rowWidth += imgInfo.width;
+                     if(rowWidth  > clientWidth ){
+                         rowList.pop();
+                         rowWidth = rowWidth - lastImgInfo.width;
+                         rowHeight = clientWidth * _this.baseHeight / rowWidth;
+
+                         _this.createRow(rowHeight);
+                         _this.rowList = [];
+                         _this.rowList.push(lastImgInfo);
+                     }
+                 });
+
+             },
+
+            createRow: function(rowHeight){
+                 console.log('createRow');
+                 var $rowCt = $('<div class="img-row"></div>');
+                 $.each(this.rowList, function(idx, imgInfo){
+                     var $imgCt = $('<div class="img-box"></div>'),
+                         $img =$(imgInfo.target);
+                     $img.height(rowHeight);
+                     $imgCt.append($img);
+                     $rowCt.append($imgCt);
+                 });
+
+                 this.$ct.append($rowCt);
+
+             },
+
+            getImgUrls: function(num) {
+                 var color, width, height, urls = [];
+                    for (var i = 0; i <num; i++) {
+                        color = Math.random().toString(16).substring(2, 8);
+                        width = Math.floor(Math.random() * 100 + 50);
+                        height = Math.floor(Math.random() * 30 + 50);
+                        urls.push("http://placehold.it/" + width + "x" + height + "/" + color + "/fff");
+                    }
+                    return urls;
+
+
+             },
+            isvisible:function (obj) {
+                var cH = $(window).height();
+                var scrollH = $(window).scrollTop();
+                var eH = $(obj).outerHeight();
+                var eT= $(obj).offset().top;
+                if(eT+eH >scrollH &&  eT < cH +scrollH ){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+         };
+
+
+
+     new Barrel($('.img-preview'));
+
+
+    </script>
+</body>
+</html>

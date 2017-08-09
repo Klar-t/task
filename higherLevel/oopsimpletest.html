@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+        *{margin:0;padding: 0;}
+        html,body,div{height: 100%}
+        .backtop{position: fixed;top: 50%;right: 0;cursor: pointer;}
+        .back{border:1px solid #ddd;padding:10px;}
+        .col_eee{background: #eee;}
+    </style>
+    <title></title>
+</head>
+<body>
+<div>滚动页面超出一屏出现返回顶部</div>
+<div class="col_eee"></div>
+<div></div>
+<div class="col_eee"></div>
+<p class="backtop"></p>
+    <script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        function GoTOP($ct){
+            this.ct = $ct ;
+            this.target = $('<span class="back">back to top</span>');
+            this.createNode();
+            this.bindEvent();
+        }
+        GoTOP.prototype ={
+            createNode:function(){
+                this.ct.append(this.target);
+                this.target.hide();
+            },
+            bindEvent:function(){
+                var _this = this;
+                $(window).scroll(function(){
+                    var sT = $(window).scrollTop();
+                    var cH = $(window).height();
+                    if(sT>=cH){
+                        _this.target.show();
+                    }else{
+                        _this.target.hide();
+                    }
+                });
+                _this.target.on("click",function(){
+                    $(window).scrollTop(0,0);
+                })
+            }
+        };
+
+        var goTop = new GoTOP($(".backtop"));
+
+
+    </script>
+</body>
+</html>
