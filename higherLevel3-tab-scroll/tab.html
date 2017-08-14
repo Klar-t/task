@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="tab.css">	
+    <title>tab</title>
+</head>
+<body>
+<div class="tab">
+    <ul class="tab-header clearfix">
+        <li class="active">选项1</li>
+        <li>选项2</li>
+        <li>选项3</li>
+    </ul>
+    <ul class="tab-container">
+        <li class="active">内容1
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+        <li>内容2</li>
+        <li>内容3</li>
+    </ul>
+</div>
+
+<div class="tab">
+    <ul class="tab-header clearfix">
+        <li class="active">选项1</li>
+        <li>选项2</li>
+        <li>选项3</li>
+    </ul>
+    <ul class="tab-container">
+        <li class="active">内容1
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+        <li>内容2</li>
+        <li>内容3</li>
+    </ul>
+</div>
+<div class="tab">
+    <ul class="tab-header clearfix">
+        <li class="active">选项1</li>
+        <li>选项2</li>
+        <li>选项3</li>
+    </ul>
+    <ul class="tab-container">
+        <li class="active">内容1
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+        <li>内容2</li>
+        <li>内容3</li>
+    </ul>
+</div>
+<script>
+Tab2=(function () {
+    function Tab(obj) {
+        this.ct = obj;
+        console.log(obj);
+        this.dom();
+        this.bind();
+    }
+    Tab.prototype={
+        dom:function () {
+            var parent = this.ct;
+            this.tabLis = parent.querySelectorAll(".tab-header>li");
+            this.tabPanels=parent.querySelectorAll(".tab-container>li");
+        },
+        bind:function () {
+            var _this = this;
+            _this.tabLis.forEach(function (li) {
+                li.onclick=function (event) {
+                    var target = event.target;
+                    var index = [].indexOf.call(_this.tabLis,target);
+                    for(var i =0;i<_this.tabLis.length;i++){
+                        _this.tabLis[i].classList.remove("active");
+                        _this.tabPanels[i].classList.remove('active');
+                    }
+                    target.classList.add("active");
+                    _this.tabPanels[index].classList.add('active');
+
+                }
+            })
+        }
+    };
+    return {
+        init:function (obj) {
+            obj.forEach(function (item) {
+                console.log(item);
+                new Tab(item);
+            });
+        }
+    }
+})();
+Tab2.init(document.querySelectorAll(".tab"))
+
+</script>
+</body>
+</html>

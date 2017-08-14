@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="scroll.css">
+    <title>轮播组件</title>
+</head>
+<body>
+<div class="carousel">
+    <ul class="img-ct">
+        <li data-index=0>
+            <a href=""><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt="1.jpg"></a>
+        </li>
+        <li data-index=1>
+            <a href=""><img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt="2.jpg"></a>
+        </li>
+        <li data-index=2>
+            <a href=""><img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt="3.jpg"></a>
+        </li>
+        <li data-index=3>
+            <a href=""><img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt="4.jpg"></a>
+        </li>
+    </ul>
+    <a class="btn btn-pre" >&lt;</a>
+    <a class="btn btn-next">&gt;</a>
+    <div class="bullet-ct">
+        <ul class="bullet">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</div>
+<div class="carousel">
+    <ul class="img-ct">
+        <li data-index=0>
+            <a href=""><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt="1.jpg"></a>
+        </li>
+        <li data-index=1>
+            <a href=""><img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt="2.jpg"></a>
+        </li>
+        <li data-index=2>
+            <a href=""><img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt="3.jpg"></a>
+        </li>
+        <li data-index=3>
+            <a href=""><img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt="4.jpg"></a>
+        </li>
+    </ul>
+    <a class="btn btn-pre" >&lt;</a>
+    <a class="btn btn-next">&gt;</a>
+    <div class="bullet-ct">
+        <ul class="bullet">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</div>
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+Carouse2=(function () {
+    function Carouse (obj) {
+            this.ct=obj;
+            this.dom();
+            this.bind();
+        }
+    Carouse.prototype={
+        dom:function () {
+            var perent = this.ct;
+                $imgct = this.$imgCt  =$(perent).find(".img-ct");
+
+            var $clone0= $(perent).find(".img-ct>li:first").clone();
+            var $clonelast = $(perent).find(".img-ct>li:last").clone();
+                this.liW = this.$imgCt.find("li").width();
+                this.len = this.$imgCt.find("li").length;
+                this.$bullets= $(perent).find(".bullet li");
+                this.flag = true;
+
+            $imgct.prepend($clonelast);
+            $imgct.append($clone0);
+            $imgct.css({
+                width:(this.len+2)*this.liW ,
+                left:-this.liW
+            });
+            this.current=0;
+        },
+        bind:function () {
+            var _this=this;
+            this.ct.find(".btn-pre").click(function () {
+                _this.prev(1)
+            });
+            this.ct.find(".btn-next").click(function () {
+                _this.next(1)
+            });
+            this.$bullets.click(function () {
+                var n = $(this).index();
+                if(n>_this.current){
+                    movelen=n-_this.current;
+                    _this.next(movelen);
+                }else{
+                    movelen=_this.current-n;
+                    _this.prev(movelen)
+                }
+
+            });
+        },
+        next:function (movelen) {
+            var _this= this;
+            if(!this.flag){return}
+            this.flag=false;
+            this.$imgCt.animate({left:"-="+_this.liW*movelen},function () {
+                _this.current+=movelen;
+                if(_this.current==_this.len){
+                    _this.current=0;
+                    _this.$imgCt.css({left:-_this.liW});
+
+                }
+                _this.bullet();
+                _this.flag=true;
+            });
+        },
+        prev:function (movelen) {
+            if(!this.flag){return}
+            var _this= this;
+            this.flag=false;
+            this.$imgCt.animate({left:"+="+_this.liW*movelen},function () {
+                _this.current-=movelen;
+
+                if( _this.current<0){
+                    _this.current= _this.len-1;
+                    _this.$imgCt.css({left:-_this.liW*( _this.current+1)})
+                }
+                _this.bullet();
+                _this.flag=true;
+            })
+        },
+        bullet:function () {
+            this.$bullets.removeClass("active");
+            this.$bullets.eq(this.current).addClass("active");
+        }
+    };
+    return {
+       init:function (obj) {
+           $(obj).each(function (index,item) {
+               new Carouse($(item))
+           })
+       }
+
+    }
+})();
+Carouse2.init(".carousel")
+
+</script>
+</body>
+</html>
