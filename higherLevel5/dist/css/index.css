@@ -1,0 +1,708 @@
+@charset "utf-8";
+/**
+reset
+
+ */
+@font-face { font-family:comic;src:url(http://valid_url/some_font_file.eot); }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+ul,dl {
+    list-style: none;
+}
+body,
+html {
+    font-family: "Work Sans", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    height: 100%;
+    color: #828282;
+    min-width: 1330px;
+}
+nav,
+.clearfix::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+h1, h2, h3, h4, h5, h6, figure{
+    color: #000;
+    font-family: "Work Sans", Arial, sans-serif;
+    font-weight: 400;
+    margin: 0 0 20px 0;
+}
+/**
+basic style
+
+ */
+nav {
+    margin: 40px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.logo {
+    font-family: "Sacramento", Arial, serif;
+    font-size: 40px;
+    line-height: 40px;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    display: inline-block;
+}
+.container {
+    width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+}
+nav ul {
+    float: right;
+    margin: 0;
+    padding: 2px 0 0 0;
+}
+nav ul li {
+    display: inline;
+    position: relative;
+
+}
+nav ul a {
+    padding: 30px 10px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    text-transform: uppercase;
+
+}
+nav ul a.active {
+    color: #fff;
+}
+.subnav {
+    position: absolute;
+    left: 0;
+    padding: 20px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0px 14px 33px -9px rgba(0, 0, 0, 0.75);
+    top: 80px;
+    opacity: 0;
+    transition: all .5s linear;
+}
+
+.subnav::before {
+    display: inline-block;
+    content: "";
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+    position: absolute;
+    bottom: 100%;
+    left: 40px;
+    margin-left: -8px;
+    font-size: 15px;
+    line-height: 1.2;
+    font-weight: bold;
+}
+nav ul.subnav a {
+    padding: 2px;
+    color: #999;
+    white-space: nowrap;
+    text-transform: none;
+    font-size: 15px;
+}
+.subnav a:hover {
+    color:#666
+}
+nav ul  li:hover .subnav {
+    opacity: 1;
+    top: 50px;
+}
+header {
+    position: relative;
+    width: 100%;
+    color: #fff;
+    /*background: url("../images/img_bg_2.jpg") no-repeat center top/cover;*/
+    text-align: center;
+    padding: 7em;
+    display: table;
+}
+.overlay,
+.overlay2{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    transition: all 1s ease;
+}
+.overlay2 {
+    opacity: 0;
+}
+.cards li:hover .overlay2{
+    opacity: 1;
+
+}
+header .container {
+    z-index: 1;
+    width: 750px;
+    margin-top: 124px;
+}
+header h1 {
+    margin-bottom: 0px;
+    font-size: 100px;
+    line-height: 1.5;
+    font-family: "Sacramento", Arial, serif;
+    color: #fff;
+}
+header h2 {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    font-weight: normal;
+    color: #fff;
+}
+header   .container  ul {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+header  .container   ul li {
+    width: 100px;
+    height: 100px;
+    background: rgba(241, 78, 149, 0.8);
+    border-radius: 50%;
+    margin: 0 4px;
+    vertical-align: middle;
+    padding-top: 11px;
+    animation: pluse 1s ease infinite;
+}
+@keyframes pluse {
+    from {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.05, 1.05);
+        transform: scale(1.05, 1.05);
+    }
+
+    to {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+}
+header ul li strong,
+header ul li span {
+    display: block;
+    width: 100%;
+}
+header ul li strong {
+    font-size: 30px;
+    font-weight: normal;
+}
+header ul li span {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+}
+.back,
+header .btn ,
+.wedding-Gallery .btn{
+    padding: 15px 20px;
+    background: #fff;
+    color: #F14E95;
+    border: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    font-family: "Work Sans", Arial, sans-serif;
+    font-weight: 400;
+    border-radius: 30px;
+    display: inline-block;
+    cursor: pointer;
+    border:1px solid #F14E95;
+}
+.back {
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 50px;
+    width: 85px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 3px;
+}
+header p {
+    margin-bottom: 20px;
+}
+section {
+    position: relative;
+    text-align: center;
+    padding:7em 0;
+    width: 100%;
+}
+section h2 {
+    font-size: 60px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-weight: bold;
+    color: #F14E95;
+    font-family: "Sacramento", Arial, serif;
+    text-align: center;
+}
+section h3 {
+
+    font-size: 24px;
+}
+.story .cards {
+    display: flex;
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+}
+section p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #828282;
+    width: 66.67%;
+    margin: 0 auto;
+}
+.cards dt {
+    font-family: "Sacramento", Arial, serif;
+    color: #F14E95;
+    font-size: 30px;
+}
+
+.cards img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    float: left;
+}
+.wedding-Gallery .cards img{
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+
+}
+.cards dd {
+    text-align: left;
+}
+.cards dl {
+    margin-left: 180px;
+}
+.cards>div:first-of-type  dd {
+    text-align: right;
+}
+.cards>div:first-of-type dl{
+    margin-left: 0;
+    margin-right: 180px;
+}
+.cards>div:first-of-type img{
+    float: right;
+}
+.pb-80 {
+    padding-bottom: 80px;
+}
+
+.icon-heart {
+    display: block;
+    width: 60px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 60px;
+    line-height: 60px;
+    animation: pluse 1s ease infinite;
+    margin: -30px;
+}
+.wedding-events {
+    background: url(../images/e30892aa24a965325d5f813027293684.jpg) no-repeat left top/cover;
+}
+.wedding-events .overlay {
+    background: rgba(0,0,0,.4);
+}
+.wedding-events h2 {
+    color: #fff;
+}
+.section-tit {
+    padding-bottom: 80px;
+
+}
+.section-tit span {
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+.cards-box {
+    display: flex;
+    justify-content: space-around;
+    width: 83.333%;
+    margin: 0 auto;
+    color: #fff;
+}
+.cards-box .cards {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    width: 45%;
+    border-radius: 4px;
+}
+.cards-box .cards h3 {
+    font-size: 20px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    display: block;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.cards-box .cards  ul {
+    float: left;
+    width: 50%;
+    margin-bottom: 30px;
+    display: table;
+    color: rgba(255,255,255,.8)
+}
+section .cards-box .cards p {
+    color: rgba(255,255,255,.8);
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 16px;
+}
+.icon-time {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+.icon-rili {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+.our-story .section-tit span {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.storys-card {
+    position: relative;
+    margin: 20px;
+    display: table;
+    width: 100%;
+}
+.storys-card img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    margin-left: -90px;
+}
+.storys-card>div {
+
+    width: 376px;
+    padding: 30px;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    position: relative;
+}
+.storys-container {
+    position: relative;
+    padding: 1px;
+}
+.storys-container::before {
+    content: "";
+    position: absolute;
+    display: block;
+    height: 100%;
+    left: 50%;
+    border-left: 1px solid #d4d4d4;
+}
+.storys-card>div::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 14px solid transparent;
+    border-left: 14px solid #d4d4d4;
+    position: absolute;
+    top: 80px;
+}
+.storys-card>div::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 14px solid transparent;
+    border-left: 14px solid #fff;
+    position: absolute;
+    top: 80px;
+}
+.storys-card:nth-of-type(odd)>div {
+    float: left;
+    margin-left: 80px;
+}
+.storys-card:nth-of-type(even)>div {
+    float: right;
+    margin-right: 100px;
+}
+.storys-card:nth-of-type(odd)>div::before {
+    left:100%
+}
+.storys-card:nth-of-type(odd)>div::after {
+    left:99.5%
+}
+.storys-card:nth-of-type(even)>div::before {
+    right:100%;
+    border-left:14px solid transparent;
+    border-right:14px solid #d4d4d4;
+}
+
+.storys-card:nth-of-type(even)>div::after{
+    right:99.5%;
+    border-left:14px solid transparent;
+    border-right:14px solid #fff;
+
+}
+.storys-card:last-child {
+    margin-bottom: 40px;
+}
+::selection {
+    background: #F14E95;
+    color: #fff;
+}
+.wedding-Gallery {
+    background: rgba(0, 0, 0, 0.04);
+}
+.wedding-Gallery .section-tit span {
+    color: rgba(0, 0, 0, 0.4);
+}
+.storys-card>div {
+    text-align: left;
+}
+.storys-card dt {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color:#000;
+}
+.storys-card  time{
+    display: block;
+    margin-bottom: 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+section .storys-card  p{
+    padding: 0;
+    width: 100%;
+    line-height: 1.7;
+    font-size: 16px;
+}
+.wedding-Gallery ul {
+    width: 100%;
+    position: relative;
+}
+.wedding-Gallery .cards {
+}
+.wedding-Gallery li::before{
+    /* width: 100%; */
+    /* content: ""; */
+    display: inline-block;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.2);
+    transition: all 1s ease;
+}
+.wedding-Gallery li:hover::before{
+    background:rgba(0, 0, 0, 0.5);
+}
+.wedding-Gallery li {
+    width: 368px;
+    float: left;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    position: absolute;
+    cursor: pointer;
+    margin:0 10px 10px 0;
+
+}
+.wedding-Gallery::after {
+    display: table;
+    content: "";
+    clear: both;
+}
+.case-studies-sumary span {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+    text-align: left;
+}
+.case-studies-sumary h2 {
+    font-size: 30px;
+    color: #fff;
+    font-family: "Work Sans", Arial, sans-serif;
+    font-weight: normal;
+    text-align: left;
+}
+.case-studies-sumary {
+    position: absolute;
+    bottom: 2em;
+    left: 2em;
+    right: 2em;
+}
+.regist {
+    background: url(../images/7e5871b262db882455f6044392d87e06.jpg) no-repeat center center /cover;
+}
+.regist h2 {
+    color: #fff;
+}
+.registing {
+    width: 83.333%;
+    margin: 0 auto;
+    font-size: 0;
+}
+.registing input{
+    width: 29.33%;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    height: 54px;
+    margin: 2%;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+.registing input[type="button"] {
+    background: #F14E95;
+    border-radius: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.registing input::-webkit-input-placeholder { /* WebKit browsers */
+    color:#fff;
+}
+.registing input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:#fff;
+}
+.registing input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:#fff;
+}
+.registing input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:#fff;
+}
+.regist .section-tit {
+    padding-bottom: 40px;
+}
+.regist .section-tit p {
+    color:rgba(255,255,255,.5)
+}
+footer p {
+    margin-bottom: 20px;
+}
+footer {
+    padding: 7em 0;
+    text-align: center;
+}
+footer small {
+    display: block;
+}
+footer [class^="icon-"] {
+    width: 20px;
+    height: 20px;
+    fill: #F14E95;
+    display: inline-block;
+}
+footer a {
+    color: #F14E95;
+}
+footer svg{
+    margin:0 10px;
+}
+.icon-jiahao {
+    width: 60px;
+    height: 60px;
+    fill: rgba(255,255,255,.6);
+    z-index: 200;
+    display: block;
+    font-weight: bold;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    padding: 2px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -30px;
+}
+.overlay.carousel {
+    width: 100%;
+    overflow: hidden;
+}
+ul.img-ct{position: absolute}
+ul.img-ct,ul.img-ct li {
+    width: 100%;
+    height: 100%;
+}
+
+.img-ct img {
+    height: 100%;
+}
+a.btn.btn-pre,a.btn.btn-next {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    border-radius: 50%;
+    line-height: 40px;
+    font-size: 50px;
+    left: 20px;
+    margin-top: -40px;
+    cursor: pointer;
+    z-index: 100;
+}
+a.btn.btn-next{
+    left:auto;
+    right:20px;
+}
+ul.img-ct li{
+    float: left;
+    overflow: hidden;
+}
+.wedding-Gallery .btn {
+    margin-top: 20px;
+}
+@font-face {font-family: "iconfont";
+  src: url(../css/fonts/iconfont.eot); /* IE9*/
+  src: url(../css/fonts/iconfont.eot#iefix) format('embedded-opentype'), 
+  url(../css/fonts/iconfont.woff) format('woff'), 
+  url(../css/fonts/iconfont.ttf) format('truetype'), 
+  url(../images/db25bbb421ba79822e45abf3680ea46b.svg#iconfont) format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-heart:before {content: "\E623";color: #F14E95;font-size: 14px;line-height: 1;}
+
