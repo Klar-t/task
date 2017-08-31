@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>design-patterns-single</title>
+</head>
+<body>
+<script>
+    Person = (function() {
+        var instance;
+        function init(name) {
+            return {name:name}
+        }
+    return {
+        createPerson:function (name) {
+            if(!instance){
+                instance =  init(name);
+            }
+            return instance
+        }
+    }
+
+    })();
+    Person.createPerson("andy");//{name: "andy"}
+    Person.createPerson("lili");//{name: "andy"}
+</script>
+</body>
+</html>
