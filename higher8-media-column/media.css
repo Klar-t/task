@@ -1,0 +1,22 @@
+@charset "utf-8";
+* {margin: 0;padding: 0;}
+@media screen and  (min-width: 1200px) {
+    body{
+        background: red;
+    }
+}
+@media screen and  (max-width: 1200px) {
+    body{
+        background: green;
+    }
+}
+@media screen and (max-width: 900px) {
+    body{
+        background: yellow;
+    }
+}
+@media screen and (max-width: 600px) {
+    body{
+        background: gray;
+    }
+}
